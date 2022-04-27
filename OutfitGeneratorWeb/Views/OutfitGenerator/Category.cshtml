@@ -1,0 +1,65 @@
+﻿@model IList<OutfitGeneratorWeb.Models.WomenCategory>
+
+@{
+    ViewBag.Title = "New Yorker";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="main">
+    <div class="row" id="button_back">
+        <div class="col-sm-6">
+
+            <div class="controls">
+                <a href="@Url.Action("Index","Home")" class="previous button1">
+                    <span><i class="fa fa-angle-left" style="font-size:30px;color:red"></i></span>
+                </a>
+            </div>
+        </div>
+        <div class="">
+            <div class="catHeading">Step 1 - Choose Category</div>
+        </div>
+    </div>
+    
+    <div id="catDiv">
+        <div class="row">
+            @{
+                foreach (var item in Model)
+                {
+                    <div class="col-sm-4">
+                        <a class="cat catOverlay" href="@Url.Action("GetSubCategories","SubCategory", new { apiUrl = item.apiUrl,segment=ViewBag.Segment })">
+                            <img src="@item.ImageUrl" onerror="this.onerror=null;this.src='https://demooutfitgenerator.azurewebsites.net/ui/images/image-not-found.jpg';">
+                            <div class="catTitle">@item.CategoryName</div>
+                        </a>
+                    </div>
+                }
+            }
+
+            
+            @*<div class="col-sm-4">
+            <a class="cat catOverlay" href="#">
+                <img src="images/toptshirt.png">
+                <div class="catTitle">Tops/T-shirts</div>
+            </a>
+        </div>
+        <div class="col-sm-4">
+            <a class="cat catOverlay" href="#">
+                <img src="images/sweartshit.png">
+                <div class="catTitle">SweatShirts</div>
+            </a>
+        </div>
+        <div class="col-sm-4">
+            <a class="cat catOverlay" href="#">
+                <img src="images/pnat-for-women.png">
+                <div class="catTitle">Pants</div>
+            </a>
+        </div>
+        <div class="col-sm-4">
+            <a class="cat catOverlay" href="#">
+                <img src="images/Accessories-women.png">
+                <div class="catTitle">Accessories</div>
+            </a>
+        </div>*@
+        </div>
+    </div>
+</div>
+

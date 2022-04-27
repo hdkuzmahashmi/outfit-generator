@@ -1,0 +1,267 @@
+﻿@*@model OutfitGeneratorWeb.Models.Products*@
+@model OutfitGeneratorWeb.ViewModel.ProductDetailViewModel
+@{
+    ViewBag.Title = "Product Detail";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<!-----start Product details div ---->
+<div class="card-wrapper">
+    <div class="card">
+        <!-- card left -->
+        <div class="product-imgs">
+            <div class="img-display">
+                <div class="img-showcase">
+                    @{
+
+                        //foreach (var vari in Model.Variant)
+                        //{
+                        foreach (var img in Model.Variant.Images)
+                        {
+                                <img src="@OutfitGeneratorWeb.Classes.ApiUrlMaker.ProductImageUrl(img.key, "high", "1_1")" alt="shoe image">
+                        }
+                            //break;
+                        //}
+                    }
+                </div>
+            </div>
+            <div class="img-select">
+                @{
+                    var counter = 0;
+                    //foreach (var vari in Model.Variant.Variants)
+                    //foreach (var vari in Model.Variants)
+                    //{
+
+                        foreach (var img in Model.Variant.Images)
+                        {
+                            counter = counter + 1;
+                            <div class="img-item">
+                                @*<a href="#" data-id="1">*@
+                                <a href="#" data-id="@counter">
+                                    <img src="@OutfitGeneratorWeb.Classes.ApiUrlMaker.ProductImageUrl(img.key, "high", "1_1")" alt="shoe image">
+                                    @*<img src="images/product-image2.jpg" alt="shoe image">*@
+                                </a>
+                            </div>
+                        }
+                        //break;
+                    //}
+                }
+            </div>
+
+        </div>
+        <!-- card right -->
+        <div class="product-content">
+            @*<br>*@
+            <h2 class="product-title">T-Shirt</h2>
+            @*<a href="#" class="product-link">visit nike store</a>
+                <div class="product-rating">
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star-half-alt"></i>
+                    <span>4.7(21)</span>
+                </div>*@
+
+            <div class="product-price">
+                @*<p class="last-price">Old Price: <span>$257.00</span></p>*@
+                <p class="new-price">New Price: <span>$249.00 (5%)</span></p>
+            </div>
+
+            @*<div class="product-detail">
+                    <h2>about this item: </h2>
+                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Illo eveniet veniam tempora fuga tenetur placeat sapiente architecto illum soluta consequuntur, aspernatur quidem at sequi ipsa!</p>
+                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Consequatur, perferendis eius. Dignissimos, labore suscipit. Unde.</p>
+                    <ul>
+
+                        <li>Available: <span>in stock</span></li>
+                        <li>Category: <span>Shoes</span></li>
+                        <li>Shipping Area: <span>All over the world</span></li>
+                        <li>Shipping Fee: <span>Free</span></li>
+                    </ul>
+                </div>*@
+
+
+
+            <div class="purchase-info">
+
+                <div class="colors">
+                    <ul>
+                        @{
+                            foreach (var vari in Model.Product.Variants)
+                            {
+                                <li>
+                                    <label>
+                                        @vari.Color_Group
+                                        @*<input type="radio" name="color" value="@vari.Color_Group">
+                                        <span class="swatch">"@vari.Color_Group"</span>*@
+                                    </label>
+                                </li>
+                            }
+                        }
+                        @*<li>
+                                <label>
+                                    <input type="radio" name="color" value="blue">
+                                    <span class="swatch" style="background-color:#6e8cd5"></span>
+                                </label>
+                            </li>
+                            <li>
+                                <label>
+                                    <input type="radio" name="color" value="green">
+                                    <span class="swatch" style="background-color:#44c28d"></span>
+                                </label>
+                            </li>*@
+                    </ul>
+                </div>
+
+                <div class="wrap">
+                    <select class="one">
+                        <option selected="selected">Sizes</option>
+                        <option>Small</option>
+                        <option>Mediu</option>
+                        <option>Large</option>
+                        <option>XL</option>
+                        <option>XXL</option>
+                    </select>
+
+                </div>
+
+
+                <input type="number" min="0" value="1">
+                <button type="button" class="btn">
+                    Add to Cart <i class="fas fa-shopping-cart"></i>
+                </button>
+                <button type="button" class="btn">Compare</button>
+            </div>
+
+            <!---- <div class = "social-links">
+                <p>Share At: </p>
+                <a href = "#">
+                    <i class = "fab fa-facebook-f"></i>
+                </a>
+                <a href = "#">
+                    <i class = "fab fa-twitter"></i>
+                </a>
+                <a href = "#">
+                    <i class = "fab fa-instagram"></i>
+                </a>
+                <a href = "#">
+                    <i class = "fab fa-whatsapp"></i>
+                </a>
+                <a href = "#">
+                    <i class = "fab fa-pinterest"></i>
+                </a>
+                </div>---->
+        </div>
+    </div>
+
+</div>
+<!-----End Product details div ---->
+<!-----Start Product Slider div ---->
+<div class="viewed">
+    <div class="container-fulid" id="main-container">
+        <div class="row">
+
+            <div class="col-sm-12">
+                <div class="row">
+
+                    <div class="col">
+                        <div class="bbb_viewed_title_container">
+                            <h3 class="bbb_viewed_title">T-Shirt</h3>
+
+                        </div>
+
+                        <button class="slider__arrow slider__arrow-prev js-slider-prev bbb_viewed_nav bbb_viewed_prev">&#8249;</button>
+                        <div class="bbb_viewed_slider_container">
+
+
+                            <div class="owl-carousel owl-theme bbb_viewed_slider">
+                                <!---Start Owl Slider Div----->
+                                @{
+                                    foreach (var item in Model.Outfit)
+                                    {
+                                        <div class="owl-item">
+                                            <div class="bbb_viewed_item discount d-flex flex-column align-items-center justify-content-center text-center">
+                                                <div class="single-product">
+                                                    <div class="product-img">
+                                                        <a href="product-details.html">
+                                                            <img class="default-img" src="@item.ImageUrl" alt="#">
+                                                            <img class="hover-img" src="@item.ImageUrl" alt="#">
+                                                        </a>
+                                                        <div class="button-head">
+                                                            <div class="product-action-2">
+                                                                <a title="Add to cart" href="#">Add to cart</a>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="product-content">
+                                                    <h3><a href="product-details.html">Women Hot Collection</a></h3>
+                                                    <div class="product-price">
+                                                        <span>$29.00</span>
+                                                    </div>
+                                                    <div class="colors">
+                                                        <ul>
+                                                            <li>
+                                                                <label>
+                                                                    <input type="radio" name="color" value="black">
+                                                                    <span class="swatch" style="background-color:#222"></span>
+                                                                </label>
+                                                            </li>
+                                                            <li>
+                                                                <label>
+                                                                    <input type="radio" name="color" value="blue">
+                                                                    <span class="swatch" style="background-color:#6e8cd5"></span>
+                                                                </label>
+                                                            </li>
+                                                            <li>
+                                                                <label>
+                                                                    <input type="radio" name="color" value="green">
+                                                                    <span class="swatch" style="background-color:#44c28d"></span>
+                                                                </label>
+                                                            </li>
+                                                        </ul>
+                                                    </div>
+                                                </div>
+                                                
+                                            </div>
+                                        </div>
+                                    }
+                                }
+                                <!---End Owl Slider Div----->
+                            </div>
+
+                        </div>
+                        <button class="slider__arrow slider__arrow-next js-slider-next bbb_viewed_nav bbb_viewed_prev">&#8250;</button>
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+    </div>
+</div>
+<!-----end Product Slider div ---->
+<!-----Start Product details script ---->
+<script>
+    const imgs = document.querySelectorAll('.img-select a');
+    const imgBtns = [...imgs];
+    let imgId = 1;
+
+    imgBtns.forEach((imgItem) => {
+        imgItem.addEventListener('click', (event) => {
+            event.preventDefault();
+            imgId = imgItem.dataset.id;
+            slideImage();
+        });
+    });
+
+    function slideImage() {
+        const displayWidth = document.querySelector('.img-showcase img:first-child').clientWidth;
+
+        document.querySelector('.img-showcase').style.transform = `translateX(${- (imgId - 1) * displayWidth}px)`;
+    }
+
+    window.addEventListener('resize', slideImage);
+
+</script>
+<!-----End Product details script ---->

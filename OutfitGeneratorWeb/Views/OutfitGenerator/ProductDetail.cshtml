@@ -1,0 +1,280 @@
+﻿@model OutfitGeneratorWeb.ViewModel.ProductDetailViewModel
+@{
+    ViewBag.Title = "Product Detail";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<!-----Start Back Button ---->
+<div class="row" id="button_back">
+    <div class="col-sm-6">
+
+        <div class="controls">
+            <a href="@Url.Action("GetProductsBySubCategories", "SubCategory", new { apiUrl = ViewBag.ApiUrl, webCategory = ViewBag.WebCategory, variId = ViewBag.VariantId, segment = ViewBag.Segment })" class="previous button1">
+                <span><i class="fa fa-angle-left" style="font-size:30px;color:red"></i></span>
+            </a>
+        </div>
+    </div>
+    <div class="">
+        <div class="catHeading">Step 4 - Outfit</div>
+    </div>
+</div>
+<!-----End Back Button ---->
+<!-----start Product details div ---->
+<div class="card-wrapper">
+    <div class="">
+        <div class="row">
+            <div class="col-sm-8">
+                <div class="product-imgs">
+                    <div class="container">
+                        <section id="call-action" class="action">
+                            <div class="container5">
+                                <div class="recursos">
+                                    @{
+                                        if (Model.Variant != null)
+                                        {
+                                            foreach (var img in Model.Variant.Images)
+                                            {
+                                            <div class="recurso">
+                                                <img src="@OutfitGeneratorWeb.Classes.ApiUrlMaker.ProductImageUrl(img.key, "high", "1_1")" onerror="this.onerror=null;this.src='https://demooutfitgenerator.azurewebsites.net/ui/images/image-not-found.jpg';" alt="">
+                                            </div>
+                                            }
+                                        }
+                                      }
+                                </div>
+                            </div>
+                        </section>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-4">
+                <!-- card right -->
+                <div class="product-content">
+                    <br>
+                    @{
+                        if (Model.Product != null)
+                        {
+                            foreach (var item in Model.Product.Descriptions)
+                            {
+                                if (item.Language == "EN")
+                                {
+                                        <h2 class="product-title">@item.Description</h2>
+                                    break;
+                                }
+                            }
+                        }
+                        }
+                    <!----
+                    <div class = "product-rating">
+                        <i class = "fas fa-star"></i>
+                        <i class = "fas fa-star"></i>
+                        <i class = "fas fa-star"></i>
+                        <i class = "fas fa-star"></i>
+                        <i class = "fas fa-star-half-alt"></i>
+
+                    </div>---->
+
+                <div class="product-price">
+                    <!--- <p class = "last-price">Old Price: <span>$257.00</span></p>---->
+                    @{ 
+                        if (Model.Variant != null)
+                        {
+                         <p class="new-price"> Price: <span>@Model.Variant.Original_Price EUR</span></p>
+                        }
+                     }
+                </div>
+                    <div class="purchase-info">
+
+                        <div class="colors">
+                            <ul>
+                                @{
+                                    if (Model.Product != null)
+                                    {
+                                        foreach (var vari in Model.Product.Variants)
+                                        {
+                                        <li>
+                                            <label class="color-lable">
+                                                @vari.Color_Group
+                                            </label>
+                                        </li>
+                                            }
+                                        }
+                                    }
+                                @*<li>
+                                        <label>
+                                            <input type="radio" name="color" value="blue">
+                                            <span class="swatch" style="background-color:#6e8cd5"></span>
+                                        </label>
+                                    </li>
+                                    <li>
+                                        <label>
+                                            <input type="radio" name="color" value="green">
+                                            <span class="swatch" style="background-color:#44c28d"></span>
+                                        </label>
+                                    </li>*@
+                            </ul>
+                        </div>
+
+                        <div class="wrap">
+                            <select class="one">
+                                @*<option selected="selected">Sizes</option>*@
+                                @{
+                                    if (Model.Variant != null)
+                                    {
+                                        foreach (var item in Model.Variant.Sizes.OrderBy(x => x.Size_Name))
+                                        {
+                                        <option>@item.Size_Name</option>
+                                        }
+                                     }
+                                  }
+                            </select>
+
+                        </div>
+
+
+                        <!---<input type = "number" min = "0" value = "1">---->
+                        @*<button type="button" class="btn">
+                                Add to Cart <i class="fas fa-shopping-cart"></i>
+                            </button>*@
+                        <!----  <button type = "button" class = "btn">Compare</button>---->
+                    </div>
+
+                    <!---- <div class = "social-links">
+                            <p>Share At: </p>
+                            <a href = "#">
+                            <i class = "fab fa-facebook-f"></i>
+                            </a>
+                            <a href = "#">
+                            <i class = "fab fa-twitter"></i>
+                            </a>
+                            <a href = "#">
+                            <i class = "fab fa-instagram"></i>
+                            </a>
+                            <a href = "#">
+                            <i class = "fab fa-whatsapp"></i>
+                            </a>
+                            <a href = "#">
+                            <i class = "fab fa-pinterest"></i>
+                            </a>
+                        </div>---->
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+<!-----End Product details div ---->
+<!-----Start Product Slider div ---->
+<div class="viewed">
+    <div class="container-fulid" id="main-container">
+        <div class="row">
+
+            <div class="col-sm-12">
+                <h2 id="outfit_heading">Choose Your Outfit</h2>
+                <div class="row">
+
+                    <div class="col">
+                        @*<div class="bbb_viewed_title_container">
+                                <h3 class="bbb_viewed_title">T-Shirt dfdf</h3>
+
+                            </div>*@
+
+                        <button class="slider__arrow slider__arrow-prev js-slider-prev bbb_viewed_nav bbb_viewed_prev">&#8249;</button>
+                        <div class="bbb_viewed_slider_container">
+
+
+                            <div class="owl-carousel owl-theme bbb_viewed_slider">
+                                <!---Start Owl Slider Div----->
+                                @{
+                                    if (Model.Outfit != null)
+                                    {
+                                        foreach (var item in Model.Outfit)
+                                        {
+                                        <div class="owl-item">
+                                            <div class="bbb_viewed_item discount d-flex flex-column align-items-center justify-content-center text-center">
+                                                <div class="single-product">
+                                                    <div class="product-img">
+                                                        <a href="@Url.Action("GetProductDetail", "Product", new { productId = item.Id, variantId = item.ProductVariantId, apiUrl = item.apiUrl, webCategory = item.Web_Category, segment = ViewBag.Segment })">
+                                                            <img class="default-img" src="@item.ImageUrl" alt="#" onerror="this.onerror=null;this.src='https://demooutfitgenerator.azurewebsites.net/ui/images/image-not-found.jpg';">
+                                                            <img class="hover-img" src="@item.ImageUrl" alt="#" onerror="this.onerror=null;this.src='https://demooutfitgenerator.azurewebsites.net/ui/images/image-not-found.jpg';">
+                                                           
+                                                        </a>
+                                                        @*<div class="button-head">
+                                                                <div class="product-action-2">
+                                                                    <a title="Add to cart" href="#">Add to cart</a>
+                                                                </div>
+                                                            </div>*@
+                                                    </div>
+                                                </div>
+                                                <div class="product-content">
+                                                    <h3><a href="@Url.Action("GetProductDetail", "Product", new { productId = item.Id, variantId = item.ProductVariantId, apiUrl = item.apiUrl, webCategory = item.Web_Category, segment = ViewBag.Segment })">@item.ProductDescription</a></h3>
+                                                    <div class="product-price">
+                                                        <span>@item.Price EUR</span>
+                                                        
+                                                    </div>
+                                                    @*<div class="colors">
+                                                            <ul>
+                                                                <li>
+                                                                    <label>
+                                                                        <input type="radio" name="color" value="black">
+                                                                        <span class="swatch" style="background-color:#222"></span>
+                                                                    </label>
+                                                                </li>
+                                                                <li>
+                                                                    <label>
+                                                                        <input type="radio" name="color" value="blue">
+                                                                        <span class="swatch" style="background-color:#6e8cd5"></span>
+                                                                    </label>
+                                                                </li>
+                                                                <li>
+                                                                    <label>
+                                                                        <input type="radio" name="color" value="green">
+                                                                        <span class="swatch" style="background-color:#44c28d"></span>
+                                                                    </label>
+                                                                </li>
+                                                            </ul>
+                                                        </div>*@
+                                                </div>
+
+                                            </div>
+                                        </div>
+                                            }
+
+                                    }
+                                  }
+                                <!---End Owl Slider Div----->
+                            </div>
+
+                        </div>
+                        <button class="slider__arrow slider__arrow-next js-slider-next bbb_viewed_nav bbb_viewed_prev">&#8250;</button>
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+    </div>
+</div>
+<!-----end Product Slider div ---->
+<!-----Start Product details script ---->
+<script>
+    const imgs = document.querySelectorAll('.img-select a');
+    const imgBtns = [...imgs];
+    let imgId = 1;
+
+    imgBtns.forEach((imgItem) => {
+        imgItem.addEventListener('click', (event) => {
+            event.preventDefault();
+            imgId = imgItem.dataset.id;
+            slideImage();
+        });
+    });
+
+    function slideImage() {
+        const displayWidth = document.querySelector('.img-showcase img:first-child').clientWidth;
+
+        document.querySelector('.img-showcase').style.transform = `translateX(${- (imgId - 1) * displayWidth}px)`;
+    }
+
+    window.addEventListener('resize', slideImage);
+
+</script>
+<!-----End Product details script ---->
